@@ -23,7 +23,7 @@
         </thead>
         <tbody>
             <?php
-            require_once __DIR__ . '/../models/Doadores.php';
+            require_once __DIR__ . '/../Models/Doadores.php';
             $doador = new Doadores();
             $doadores = $doador->listarDoadores();
 

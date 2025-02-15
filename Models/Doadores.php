@@ -55,65 +55,73 @@ class Doadores {
             return "Erro ao cadastrar: " . $e->getMessage();
         }
     }
+    public function listarDoadores() {
+        try {
+            if (!$this->conn) {
+                throw new Exception("Conexão com o banco de dados não está inicializada.");
+            }
+    
+            if (empty($this->table_name)) {
+                throw new Exception("Nome da tabela não foi definido.");
+            }
+    
+            $sql = "SELECT * FROM " . $this->table_name . " ORDER BY data_cadastro DESC";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (Exception $e) {
+            error_log("Erro ao listar doadores: " . $e->getMessage());
+            return [];
+        }
+    }
+    
+    
+    public function atualizarDoador($id, $dados) {
+        try {
+            $sql = "UPDATE " . $this->table_name . " 
+                    SET nome = :nome, email = :email, cpf = :cpf, telefone = :telefone, 
+                        data_nascimento = :data_nascimento, intervalo_doacao = :intervalo_doacao, 
+                        valor_doacao = :valor_doacao, forma_pagamento = :forma_pagamento, 
+                        conta_debito = :conta_debito, bandeira_cartao = :bandeira_cartao, 
+                        cartao_prefixo = :cartao_prefixo, cartao_sufixo = :cartao_sufixo, endereco = :endereco
+                    WHERE id = :id";
+    
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([
+                ':id' => $id,
+                ':nome' => $dados['nome'],
+                ':email' => $dados['email'],
+                ':cpf' => $dados['cpf'],
+                ':telefone' => $dados['telefone'],
+                ':data_nascimento' => $dados['data_nascimento'],
+                ':intervalo_doacao' => $dados['intervalo_doacao'],
+                ':valor_doacao' => $dados['valor_doacao'],
+                ':forma_pagamento' => $dados['forma_pagamento'],
+                ':conta_debito' => $dados['conta_debito'] ?? null,
+                ':bandeira_cartao' => $dados['bandeira_cartao'] ?? null,
+                ':cartao_prefixo' => $dados['cartao_prefixo'] ?? null,
+                ':cartao_sufixo' => $dados['cartao_sufixo'] ?? null,
+                ':endereco' => $dados['endereco']
+            ]);
+    
+            return "Doador atualizado com sucesso!";
+        } catch (PDOException $e) {
+            return "Erro ao atualizar: " . $e->getMessage();
+        }
+    }
+    
+    
+    public function deletarDoador($id) {
+        try {
+            $sql = "DELETE FROM " . $this->table_name . " WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute([':id' => $id]);
+    
+            return "Doador excluído com sucesso!";
+        } catch (PDOException $e) {
+            return "Erro ao excluir: " . $e->getMessage();
+        }
+    }
 }
-
-// public function listarDoadores() {
-//     try {
-//         $sql = "SELECT * FROM " . $this->table_name . " ORDER BY data_cadastro DESC";
-//         $stmt = $this->conn->prepare($sql);
-//         $stmt->execute();
-//         return $stmt->fetchAll(PDO::FETCH_ASSOC);
-//     } catch (PDOException $e) {
-//         return [];
-//     }
-// }
-
-// public function atualizarDoador($id, $dados) {
-//     try {
-//         $sql = "UPDATE " . $this->table_name . " 
-//                 SET nome = :nome, email = :email, cpf = :cpf, telefone = :telefone, 
-//                     data_nascimento = :data_nascimento, intervalo_doacao = :intervalo_doacao, 
-//                     valor_doacao = :valor_doacao, forma_pagamento = :forma_pagamento, 
-//                     conta_debito = :conta_debito, bandeira_cartao = :bandeira_cartao, 
-//                     cartao_prefixo = :cartao_prefixo, cartao_sufixo = :cartao_sufixo, endereco = :endereco
-//                 WHERE id = :id";
-
-//         $stmt = $this->conn->prepare($sql);
-//         $stmt->execute([
-//             ':id' => $id,
-//             ':nome' => $dados['nome'],
-//             ':email' => $dados['email'],
-//             ':cpf' => $dados['cpf'],
-//             ':telefone' => $dados['telefone'],
-//             ':data_nascimento' => $dados['data_nascimento'],
-//             ':intervalo_doacao' => $dados['intervalo_doacao'],
-//             ':valor_doacao' => $dados['valor_doacao'],
-//             ':forma_pagamento' => $dados['forma_pagamento'],
-//             ':conta_debito' => $dados['conta_debito'] ?? null,
-//             ':bandeira_cartao' => $dados['bandeira_cartao'] ?? null,
-//             ':cartao_prefixo' => $dados['cartao_prefixo'] ?? null,
-//             ':cartao_sufixo' => $dados['cartao_sufixo'] ?? null,
-//             ':endereco' => $dados['endereco']
-//         ]);
-
-//         return "Doador atualizado com sucesso!";
-//     } catch (PDOException $e) {
-//         return "Erro ao atualizar: " . $e->getMessage();
-//     }
-// }
-
-
-// public function deletarDoador($id) {
-//     try {
-//         $sql = "DELETE FROM " . $this->table_name . " WHERE id = :id";
-//         $stmt = $this->conn->prepare($sql);
-//         $stmt->execute([':id' => $id]);
-
-//         return "Doador excluído com sucesso!";
-//     } catch (PDOException $e) {
-//         return "Erro ao excluir: " . $e->getMessage();
-//     }
-// }
-
 
 ?>

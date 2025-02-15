@@ -2,8 +2,8 @@
 class Database {
     private $host = "localhost";
     private $db_name = "doacoes";
-    private $username = "root"; // Alterar se necessário
-    private $password = ""; // Alterar se necessário
+    private $username = "root"; 
+    private $password = ""; 
     public $conn;
 
     public function getConnection() {

@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Assets/Style.css">
     <title>Lista de Doadores</title>
 </head>
-<body>
-    <h2>Lista de Doadores</h2>
+<body class="Container-alin">
+    <div class="Container-ex">
+    <h2 class="Alinha-itens til-pag">Lista de Doadores</h2>
     <a href="create.php">Cadastrar Novo Doador</a>
     <table style="border='1'">
         <thead>
@@ -45,5 +47,6 @@
             ?>
         </tbody>
     </table>
+    </div>
 </body>
 </html>

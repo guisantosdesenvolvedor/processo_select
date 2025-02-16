@@ -50,7 +50,11 @@ class Doadores {
                 ':endereco' => $dados['endereco']
             ]);
 
-            return "Doador cadastrado com sucesso!";
+            return "<script>
+                        alert('Doador cadastrado com sucesso!');
+                        window.location.href = '../Views/index.php';
+                    </script>";
+
         } catch (PDOException $e) {
             return "Erro ao cadastrar: " . $e->getMessage();
         }

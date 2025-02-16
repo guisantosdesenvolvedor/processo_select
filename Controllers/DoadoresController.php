@@ -22,7 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $resultado = $doador->criarDoador($dados);
     echo $resultado;
+
 }
+
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $doador = new Doadores();
@@ -53,7 +55,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['id'])) {
     $resultado = $doador->atualizarDoador($id, $dados);
     echo $resultado;
 }
-
 
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['delete'])) {
     $doador = new Doadores();

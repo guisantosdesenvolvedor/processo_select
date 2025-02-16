@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Doadores</title>
+    
 </head>
 <body>
     <h2>Cadastro de Doadores</h2>
-    <form action="../controllers/DoadoresController.php" method="POST">
+    <form action="../controllers/DoadoresController.php" method="POST" id="formCadastro">
         <label>Nome:</label>
         <input type="text" name="nome" required><br>
 
@@ -59,11 +60,15 @@
         <button type="submit">Cadastrar</button>
     </form>
 
+    <p id="countdown"></p>
+
+
     <script>
         document.getElementById('forma_pagamento').addEventListener('change', function() {
             document.getElementById('debito').style.display = this.value == 'Débito' ? 'block' : 'none';
             document.getElementById('credito').style.display = this.value == 'Crédito' ? 'block' : 'none';
         });
+        
     </script>
 </body>
 </html>

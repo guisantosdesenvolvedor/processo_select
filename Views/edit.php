@@ -57,16 +57,38 @@
         <input type="number" step="0.01" name="valor_doacao" value="<?= $doadorEncontrado['valor_doacao']; ?>" required><br>
 
         <label>Forma de Pagamento:</label>
-        <select name="forma_pagamento">
+        <select name="forma_pagamento" id="forma_pagamento" onchange="toggleContaDebito()">
             <option value="Débito" <?= $doadorEncontrado['forma_pagamento'] == 'Débito' ? 'selected' : ''; ?>>Débito</option>
             <option value="Crédito" <?= $doadorEncontrado['forma_pagamento'] == 'Crédito' ? 'selected' : ''; ?>>Crédito</option>
         </select><br>
+
+        <!-- Campo conta_debito (só aparece se for Débito) -->
+        <div id="conta_debito_div" style="display: none;">
+            <label>Conta de Débito:</label>
+            <input type="text" name="conta_debito" id="conta_debito" value="<?= $doadorEncontrado['conta_debito'] ?? ''; ?>"><br>
+        </div>
 
         <label>Endereço:</label>
         <textarea name="endereco" required><?= $doadorEncontrado['endereco']; ?></textarea><br>
 
         <button type="submit">Atualizar</button>
     </form>
+
+    <script>
+        function toggleContaDebito() {
+            var formaPagamento = document.getElementById("forma_pagamento").value;
+            var contaDebitoDiv = document.getElementById("conta_debito_div");
+
+            if (formaPagamento === "Débito") {
+                contaDebitoDiv.style.display = "block";
+            } else {
+                contaDebitoDiv.style.display = "none";
+            }
+        }
+
+        // Chama a função ao carregar para ajustar o campo corretamente
+        window.onload = toggleContaDebito;
+    </script>
 
     <?php
         } else {
@@ -79,9 +101,8 @@
 
 <td>
     <a href="edit.php?id={$d['id']}">Editar</a> | 
-    <a href="../controllers/DoadoresController.php?delete={$d['id']}" onclick='return confirm(\"Tem certeza que deseja excluir?\")'>Excluir</a>
+    <a href="../controllers/DoadoresController.php?delete={$d['id']}" onclick='return confirm("Tem certeza que deseja excluir?")'>Excluir</a>
 </td>
-
 
 </body>
 </html>

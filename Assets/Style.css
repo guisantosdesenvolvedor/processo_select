@@ -25,6 +25,7 @@ a{
     border: 1px solid black;
     width: 100%;
     height: 90vh   ;
+    overflow:auto;
 }
 
 .til-pag{
@@ -45,7 +46,7 @@ a{
 button.button-cd{
     padding: 10px 12px;
     margin-left: 20px;
-    background-color: rgba(3, 58, 252, 0.8);
+    background-color: rgba(24, 193, 29, 0.8);
     border-radius: 5px;
     border: none;
     transition: transform 0.3s ease-in-out;
@@ -67,7 +68,7 @@ button.button-cd{
 
 button.button-cd-add{
     padding: 5px 8px;;
-    background-color: rgba(3, 58, 252, 0.8);
+    background-color: rgba(24, 193, 29, 0.8);
     border-radius: 5px;
     border: none;
     transition: transform 0.3s ease-in-out;
@@ -79,4 +80,116 @@ button.button-cd-exc{
     border-radius: 5px;
     border: none;
     transition: transform 0.3s ease-in-out;
+}
+
+@media (max-width: 1349px) {    
+    .Alinha-itens {
+      justify-content: flex-start; /* Substitua por sua escolha, como flex-start, center, etc. */
+    }
+}
+
+    @media (max-width: 900px) {    
+        .Add-cliente {
+            flex-direction: column !important;
+        }
+    }
+    
+
+/* Pagina create */
+
+.Container-ex1{
+    max-width: 800px !important;
+    border-radius: 20px;
+    background-color: white;
+    border: 1px solid black;
+    padding-top: 25px;
+    width: 100%;
+    height: 85vh   ;
+}
+
+.Forma-create{
+    font-family: "Montserrat", serif;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.form-de-criacao{
+    display: flex !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    align-items: center;
+}
+
+.Forma-create div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-de-criacao form{
+    width: 80%;
+    margin-top: 30px;
+}
+
+.trlinha{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row !important;
+}
+
+.button-cda{
+    padding: 10px 12px;
+    background-color: rgba(24, 193, 29, 0.8);
+    border-radius: 5px;
+    color: white;
+    font-family: "Montserrat", serif;
+    font-weight: 400;
+    border: none;
+    transition: transform 0.3s ease-in-out;
+}
+
+.alibtn{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.volt-btn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    border: 1px solid rgba(249, 0, 0, 0.8);
+    border-radius: 5px;
+}
+
+.volt-btn a{
+    color: rgba(249, 0, 0, 0.8);
+    padding: 8px 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.Container-ex1{
+    max-width: 1000px !important;
+    border-radius: 20px;
+    background-color: white;
+    border: 1px solid black;
+    width: 100%;
+    height: 90vh   ;
+}
+
+.form-de-criacao1{
+    display: flex !important;
+    justify-content: center !important;
+    flex-direction: column !important;
+    align-items: center;
+}
+
+.form-de-criacao1 form{
+    width: 80%;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
 }

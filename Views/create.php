@@ -3,70 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../Assets/Style.css">
     <title>Cadastro de Doadores</title>
     
 </head>
-<body>
-    <h2>Cadastro de Doadores</h2>
-    <form action="../controllers/DoadoresController.php" method="POST" id="formCadastro">
-        <label>Nome:</label>
-        <input type="text" name="nome" required><br>
+<body class="Container-alin">
+    <div class="Container-ex1">
+        <div>
+        <h2 class="Alinha-itens til-pag">Cadastro de Doadores</h2>
+        <div class="form-de-criacao">
+            <form action="../controllers/DoadoresController.php" method="POST" id="formCadastro" class="Forma-create">
+                <div class="trlinha">
+                    <div style="width:50%">
+                        <label>Nome:</label>
+                        <input type="text" name="nome" placeholder="Nome do Doador(a)?" required><br>
+                    </div>
+                    <div style="width:50%">
+                        <label>Email:</label>
+                        <input type="email" name="email" placeholder="Qual E-mail?" required><br>
+                    </div>
+                </div>
+                <div class="trlinha">
+                    <div style="width:30%">
+                        <label>CPF:</label>
+                        <input type="text" id="cpf" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="000.000.000-00" maxlength="14" oninput="formatarCPF(this)" required><br>
+                        <span id="cpfErro" style="color: red; display: none;">CPF inválido</span>   
+                    </div>
+                    <div style="width:30%">
+                        <label>Telefone:</label>
+                        <input type="text" id="telefone" maxlength="15" placeholder="(00) 00000-0000" name="telefone" required><br> 
+                    </div>
+                    <div style="width:30%">
+                        <label>Data de Nascimento:</label>
+                        <input type="date" name="data_nascimento" required><br>
+                    </div>
+                </div>
+                <div class="trlinha">
+                    <div style="width:30%">
+                        <label>Intervalo de Doação:</label>
+                        <select name="intervalo_doacao">
+                            <option value="Único">Único</option>
+                            <option value="Bimestral">Bimestral</option>
+                            <option value="Semestral">Semestral</option>
+                            <option value="Anual">Anual</option>
+                        </select><br>   
+                    </div>
+                    <div style="width:30%">
+                        <label>Valor da Doação:</label>
+                        <input type="text" name="valor_doacao" id="valor_doacao" required placeholder="R$ 0,00"><br>
+                    </div>
+                    <div style="width:30%">
+                        <label>Forma de Pagamento:</label>
+                        <select name="forma_pagamento" id="forma_pagamento">
+                            <option value="Débito">Débito</option>
+                            <option value="Crédito">Crédito</option>
+                        </select><br>
+                    </div>
+                </div>
+                
+                
 
-        <label>Email:</label>
-        <input type="email" name="email" required><br>
+                <div id="debito">
+                    <label>Conta Débito:</label>
+                    <input type="text" name="conta_debito"><br>
+                </div>
 
-        <label>CPF:</label>
-        <input type="text" name="cpf" required><br>
+                <div id="credito" class="trlinha" style="display: none;" >
+                    <div style="width:50%">
+                        <label>Bandeira do Cartão:</label>
+                        <input type="text" name="bandeira_cartao"><br>
+                    </div>
+                    <div style="width:50%">
+                        <label>Número do Cartão:</label>
+                        <input type="text" name="cartao_numero"><br>
+                    </div>
+                </div>
 
-        <label>Telefone:</label>
-        <input type="text" name="telefone" required><br>
 
-        <label>Data de Nascimento:</label>
-        <input type="date" name="data_nascimento" required><br>
-
-        <label>Intervalo de Doação:</label>
-        <select name="intervalo_doacao">
-            <option value="Único">Único</option>
-            <option value="Bimestral">Bimestral</option>
-            <option value="Semestral">Semestral</option>
-            <option value="Anual">Anual</option>
-        </select><br>
-
-        <label>Valor da Doação:</label>
-        <input type="number" step="0.01" name="valor_doacao" required><br>
-
-        <label>Forma de Pagamento:</label>
-        <select name="forma_pagamento" id="forma_pagamento">
-            <option value="Débito">Débito</option>
-            <option value="Crédito">Crédito</option>
-        </select><br>
-
-        <div id="debito">
-            <label>Conta Débito:</label>
-            <input type="text" name="conta_debito"><br>
+                <div>
+                    <label>Endereço:</label>
+                    <textarea name="endereco" required></textarea><br>
+                </div>
+                <button type="submit" class="button-cda alibtn">Cadastrar</button>
+                <div class="volt-btn">
+                <a href="index.php">Voltar</button>
+                </div>
+            </form>
         </div>
 
-        <div id="credito" style="display: none;">
-            <label>Bandeira do Cartão:</label>
-            <input type="text" name="bandeira_cartao"><br>
-
-            <label>Número do Cartão:</label>
-            <input type="text" name="cartao_numero"><br>
         </div>
-
-        <label>Endereço:</label>
-        <textarea name="endereco" required></textarea><br>
-
-        <button type="submit">Cadastrar</button>
-    </form>
-
-    <p id="countdown"></p>
-
-
+    </div>
     <script>
+
+        document.getElementById("telefone").addEventListener("input", function () {
+                let telefone = this.value.replace(/\D/g, ""); // Remove tudo que não for número
+
+                // Aplica a máscara automaticamente
+                if (telefone.length <= 10) { 
+                    telefone = telefone.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3"); // Formato fixo
+                } else {
+                    telefone = telefone.replace(/^(\d{2})(\d{5})(\d{0,4})/, "($1) $2-$3"); // Formato celular
+                }
+
+                this.value = telefone; // Atualiza o campo
+        });
+
+        let input = document.getElementById("valor_doacao");
+
+        input.addEventListener("input", function () {
+            let valor = this.value.replace(/\D/g, ""); // Remove tudo que não for número
+            valor = (parseFloat(valor) / 100).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+
+            if (valor === "NaN") {
+                this.value = "R$ 0,00"; // Evita erro caso o campo fique vazio
+            } else {
+                this.value = valor;
+            }
+        });
+
+        function formatarCPF(campo) {
+            let cpf = campo.value.replace(/\D/g, ''); // Remove tudo que não for número
+
+            if (cpf.length > 11) {
+                cpf = cpf.substring(0, 11); // Garante que não passe de 11 números
+            }
+
+            // Formata o CPF: 000.000.000-00
+            if (cpf.length >= 9) {
+                campo.value = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+            } else if (cpf.length >= 6) {
+                campo.value = cpf.replace(/(\d{3})(\d{3})(\d{0,3})/, "$1.$2.$3");
+            } else if (cpf.length >= 3) {
+                campo.value = cpf.replace(/(\d{3})(\d{0,3})/, "$1.$2");
+            } else {
+                campo.value = cpf;
+            }
+        }
+
         document.getElementById('forma_pagamento').addEventListener('change', function() {
             document.getElementById('debito').style.display = this.value == 'Débito' ? 'block' : 'none';
-            document.getElementById('credito').style.display = this.value == 'Crédito' ? 'block' : 'none';
+            document.getElementById('credito').style.display = this.value == 'Crédito' ? 'flex' : 'none';
         });
         
     </script>

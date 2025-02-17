@@ -107,8 +107,11 @@ class Doadores {
                 ':cartao_sufixo' => $dados['cartao_sufixo'] ?? null,
                 ':endereco' => $dados['endereco']
             ]);
-    
-            return "Doador atualizado com sucesso!";
+            
+            return "<script>
+                    alert('Doador atualizado com sucesso!');
+                    window.location.href = '../Views/index.php';
+                    </script>";
         } catch (PDOException $e) {
             return "Erro ao atualizar: " . $e->getMessage();
         }

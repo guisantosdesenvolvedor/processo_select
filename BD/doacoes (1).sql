@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17/02/2025 às 02:25
+-- Tempo de geração: 17/02/2025 às 04:01
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -39,7 +39,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `nome`, `email`, `senha`) VALUES
-(1, 'Admin', 'admin@email.com', 'e7d80ffeefa212b7c5c55700e4f7193e');
+(1, 'Admin', 'admin@email.com', 'e7d80ffeefa212b7c5c55700e4f7193e'),
+(2, 'Guilherme', 'email@gmail.com', 'senha123');
 
 -- --------------------------------------------------------
 
@@ -71,7 +72,7 @@ CREATE TABLE `doadores` (
 
 INSERT INTO `doadores` (`id`, `nome`, `email`, `cpf`, `telefone`, `data_nascimento`, `data_cadastro`, `intervalo_doacao`, `valor_doacao`, `forma_pagamento`, `conta_debito`, `bandeira_cartao`, `cartao_prefixo`, `cartao_sufixo`, `endereco`) VALUES
 (2, 'teste1', 'guikerme.1707@gmail.com', '485.123.088', '11949879657', '2005-07-17', '2025-02-15 16:22:19', 'Bimestral', 100.00, 'Débito', NULL, NULL, NULL, NULL, 'Rua Planalto De Araxa'),
-(50, 'Manoel Antonio Dos Santos Filho', 'guikerme.707@gmail.com', '5691212201', '11949879657', '2005-07-17', '2025-02-16 18:55:48', 'Único', 500.00, 'Crédito', NULL, 'Santander', '123465', '6547', 'Rua Planalto De Araxa');
+(59, 'Guilherme Antonio Dos Santos', 'guikesrme.@gmail.com', '485.123.789', '(11) 97073-9907', '2005-07-17', '2025-02-17 02:33:05', 'Semestral', 500.00, 'Crédito', NULL, 'Santander', '123456', '9123', 'Rua General Costa Campos, 376');
 
 --
 -- Índices para tabelas despejadas
@@ -100,13 +101,13 @@ ALTER TABLE `doadores`
 -- AUTO_INCREMENT de tabela `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `doadores`
 --
 ALTER TABLE `doadores`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

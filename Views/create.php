@@ -5,8 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Assets/Style.css">
     <title>Cadastro de Doadores</title>
-    
+    <style>
+        #mensagem {
+            color: red;
+            font-size: 14px;
+            display: none;
+        }
+    </style>    
 </head>
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../Public/index.php");  // Redireciona se não estiver logado
+    exit();
+}
+?>
 <body class="Container-alin">
     <div class="Container-ex1">
         <div>
@@ -65,7 +78,7 @@
 
                 <div id="debito">
                     <label>Conta Débito:</label>
-                    <input type="text" name="conta_debito"><br>
+                    <input type="number" name="conta_debito" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}"><br>
                 </div>
 
                 <div id="credito" class="trlinha" style="display: none;" >
@@ -75,7 +88,8 @@
                     </div>
                     <div style="width:50%">
                         <label>Número do Cartão:</label>
-                        <input type="text" name="cartao_numero"><br>
+                        <input type="number" name="cartao_numero" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" maxlength="10" oninput="validarCartao()" placeholder="Digite o numero do Cartão"><br>
+                        <p id="mensagem">Cartão inválido</p>
                     </div>
                 </div>
 
@@ -93,7 +107,17 @@
 
         </div>
     </div>
-    <script>
+    <script>    
+        function validarCartao() {
+                const cartaoInput = document.getElementById("cartao");
+                const mensagem = document.getElementById("mensagem");
+                
+                if (cartaoInput.value.length < 10) {
+                    mensagem.style.display = "block";
+                } else {
+                    mensagem.style.display = "none";
+                }
+            }
 
         document.getElementById("telefone").addEventListener("input", function () {
                 let telefone = this.value.replace(/\D/g, ""); // Remove tudo que não for número

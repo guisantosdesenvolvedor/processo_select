@@ -6,14 +6,27 @@
     <link rel="stylesheet" href="../Assets/Style.css">
     <title>Lista de Doadores</title>
 </head>
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../Public/index.php");  // Redireciona se não estiver logado
+    exit();
+}
+?>
 <body class="Container-alin">
     <div class="Container-ex">
-    <h2 class="Alinha-itens til-pag">Lista de Doadores</h2>
+        <div class="Alinha-itens til-pag">
+            <h2 >Lista de Doadores</h2>
+            <button type='button' class='button-cd-exc11'>
+                <a href="../Public/logout.php" class='te4Xt'>Sair</a>
+            </button>
+        </div>
+    
     <div class="Add-cliente">
         <div class="text-add">
             <p>Deseja Adicionar Doador?</p>
         </div>
-        <button type="button" class="button-cd"><a href="create.php" class="te4Xt">Cadastrar Doador</a></button>
+        <button type="button" class="button-cd"><a href="create.php" class="te4Xt">Cadastrar Doador</a></button>   
     </div>
     <Div class="Alinha-itens">
     <table class="cont-table" style="width: 90%; border-collapse: collapse; text-align: center; ">

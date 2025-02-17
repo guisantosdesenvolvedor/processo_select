@@ -6,6 +6,13 @@
     <link rel="stylesheet" href="../Assets/Style.css">
     <title>Editar Doador</title>
 </head>
+<?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../Public/index.php");  // Redireciona se não estiver logado
+    exit();
+}
+?>
 <body class="Container-alin">
     <div class="Container-ex1">
         <h2 class="Alinha-itens til-pag">Editar Doador</h2>

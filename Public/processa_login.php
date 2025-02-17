@@ -1,16 +1,15 @@
 <?php
 session_start();
-require "conexao.php";  // Conexão com banco
+require "conexao.php";  // Arquivo de conexão com o banco
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $senha = $_POST['senha'];
 
-    // Prepara a consulta SQL
+    // Busca usuário pelo e-mail
     $sql = "SELECT id, nome, senha FROM admin WHERE email = ?";
     $stmt = $conn->prepare($sql);
 
-    // Verifica se a preparação da consulta falhou
     if (!$stmt) {
         die("Erro na preparação da consulta: " . $conn->error);
     }
@@ -21,12 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
+        $senha_bd = $user['senha']; // Senha armazenada no banco
 
-        // Verifica a senha
-        if (password_verify($senha, $user['senha'])) {
+        // Verifica se a senha foi armazenada com hash
+        if (password_verify($senha, $senha_bd) || $senha === $senha_bd) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_name'] = $user['nome'];
-            header("Location: dashboard.php");
+            header("Location: ../Views/index.php"); // Página pós-login
             exit();
         } else {
             echo "<script>alert('Senha incorreta!');window.location='index.php';</script>";

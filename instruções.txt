@@ -1,0 +1,12 @@
+Olá,
+
+Este é o meu projeto desenvolvido. Seguem algumas informações para que você possa acessá-lo corretamente:
+
+Banco de Dados: Localizado na aba "BD".
+Página Inicial: O arquivo principal está em "Public/Index.php". Ao acessá-lo, será solicitado e-mail e senha:
+E-mail: email@gmail.com
+Senha: senha123
+Exercício Lógico: Disponível na aba "Views", no arquivo "Views/logica.php".
+Caso tenha qualquer dúvida, estou à disposição para ajudar.
+
+Observação: O projeto utiliza imagens de fundo. Caso elas não carreguem corretamente, enviei um arquivo .zip com os recursos via WhatsApp.
